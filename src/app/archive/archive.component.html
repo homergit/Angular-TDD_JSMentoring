@@ -1,0 +1,27 @@
+<h2>My Archive</h2>
+
+<div>
+  <label>Note text:
+    <input #noteText/>
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(noteText.value); noteText.value=''">
+    add
+  </button>
+</div>
+
+<ul class="notes">
+  <div *ngFor="let note of notes">
+    <li *ngIf="note.isArchived">
+      <a routerLink="/detail/{{note.id}}">
+        <span class="badge">{{note.id}}</span> {{note.text}}
+      </a>
+      <button class="delete" title="delete note"
+              (click)="delete(note)">x
+      </button>
+      <button class="archive" (click)="rearchiveItem(note)">
+        rearchive
+      </button>
+    </li>
+  </div>
+</ul>
